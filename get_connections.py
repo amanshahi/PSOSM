@@ -2,22 +2,18 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time, unicodedata
 
-driver = webdriver.Chrome('/home/aman/iiit/chromedriver')
+with open('./credentials') as file:
+    username, password, chrome_driver = (file.read()).split()
+
+driver = webdriver.Chrome(chrome_driver)
 
 driver.get("https://www.linkedin.com/")
-username = driver.find_element_by_name("session_key")
-driver.implicitly_wait(3)
-username.send_keys("amanshahi2016@gmail.com")
 
-with open('./passwd') as file:
-    passwd = file.read()
-password = driver.find_element_by_name("session_password")
-driver.implicitly_wait(3)
-password.send_keys(passwd)
+driver.implicitly_wait(6)
 
-submit = driver.find_element_by_id("login-submit")
-driver.implicitly_wait(3)
-submit.click()
+driver.find_element_by_xpath("""//*[@id="login-email"]""").send_keys(username)
+driver.find_element_by_xpath("""//*[@id="login-password"]""").send_keys(password)
+driver.find_element_by_xpath("""//*[@id="login-submit"]""").click()
 
 
 # code to dropdown
@@ -51,7 +47,7 @@ for tags in html.split(' '):
 user_connections = []
 for i in xrange(len(links)):
 	if i%2 == 0: user_connections.append(links[i])
-for i in user_connections: 
+for i in user_connections:
 	print i
 print len(user_connections)
 

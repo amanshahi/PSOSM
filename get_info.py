@@ -6,28 +6,24 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 
+with open('./credentials') as file:
+    username, password, chrome_driver = (file.read()).split()
 
-driver = webdriver.Chrome('/home/aman/iiit/chromedriver')
+driver = webdriver.Chrome(chrome_driver)
 
 driver.get("https://www.linkedin.com/")
-username = driver.find_element_by_name("session_key")
-driver.implicitly_wait(3)
-# fill your username here
-username.send_keys("amanshahi2016@gmail.com")
 
-with open('./passwd') as file:
-	passwd = file.read()
-password = driver.find_element_by_name("session_password")
-driver.implicitly_wait(3)
-# fill your password here
-password.send_keys(passwd)
+driver.implicitly_wait(6)
 
-submit = driver.find_element_by_id("login-submit")
-driver.implicitly_wait(3)
-submit.click()
+driver.find_element_by_xpath("""//*[@id="login-email"]""").send_keys(username)
+driver.find_element_by_xpath("""//*[@id="login-password"]""").send_keys(password)
+driver.find_element_by_xpath("""//*[@id="login-submit"]""").click()
+
 actions = ActionChains(driver)
+
 with open('./users') as users:
 	all_users = users.read().split('\n')
+
 for i in all_users:
 	driver.get("https://www.linkedin.com" + i)
 	driver.implicitly_wait(5)
