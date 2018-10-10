@@ -1,0 +1,4 @@
+b'Walter White'b'10 hrs \xc2\xb7'b'Lets see if the third post comes up.'
+b'Walter White was travelling to London Heathrow.'b'23 hrs \xc2\xb7'b'Flying to London tomorrow. Ping me if anybody wanna catch up.'b'Recommend'b'Heathrow Airport'b'Airport \xc2\xb7 London, United Kingdom'b'3,582,214 people checked in here'
+b'Walter White'b'9 October at 22:11 \xc2\xb7'b'Hello World!'b'This is my first facebook post.'
+b'Walter White'b'1 January 1990 \xc2\xb7 \xc2\xb7'b'Born on 1 January 1990'
