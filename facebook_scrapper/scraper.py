@@ -85,16 +85,26 @@ def scrap_data(id, scan_list, section, elements_path, save_status, file_names):
         if save_status != 3:
             scroll()
 
-        data = driver.find_elements_by_xpath(elements_path[i])
-        for d in data:
-            x = d.text.split('\n')
-            s = ''
-            for j in x[:-7]: s+=str(j.encode("utf-8"))
-            s+='\n'
-            print (file_names[i])
-            file = open(file_names[i], "a")
-            file.write(s)
+        from bs4 import BeautifulSoup
 
+        data = driver.find_elements_by_xpath(elements_path[i][0])
+        reactions = driver.find_elements_by_xpath(elements_path[i][1])
+        print (len(data))
+        for elems in data:
+            html = BeautifulSoup(elems.get_attribute('innerHTML'), 'html.parser')
+            posts = html.findAll('div', {'class': '_5pbx userContent _3576'})
+            posts.extend(html.findAll('div', {'class': '_5pbx userContent _3ds9 _3576'}))
+            all_reactions = html.findAll('a', {'class': '_3emk _401_'})
+            try: s = posts[0].text
+            except: continue
+            file = open(file_names[i], "a")
+            file.write(s + '\n@\n')
+            reacts = []
+            for elem_reacts in all_reactions:
+                reacts.append(elem_reacts['aria-label'])
+            if len(reacts) != 0: file.write(','.join(reacts))
+            else: file.write('-')
+            file.write('\n||\n')
 def create_original_link(url):
     if url.find(".php") != -1:
         original_link = "https://en-gb.facebook.com/" + ((url.split("="))[1])
@@ -141,7 +151,7 @@ def scrap_profile(ids):
 
         scan_list = ["posts"]
         section = []
-        elements_path = ["//div[@class='_4-u2 mbm _4mrt _5jmm _5pat _5v3q _4-u8']"]
+        elements_path = [["//div[@class='_5pcr userContentWrapper']", "//div[@class='_3t53 _4ar- _ipn']", "//div[@class='_5pbx userContent _3ds9 _3576']" ]]
 
         file_names = ["Posts.txt"]
         save_status = 4
