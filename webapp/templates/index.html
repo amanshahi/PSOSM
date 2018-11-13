@@ -6,6 +6,10 @@
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 	 <style type="text/css" media="screen">
+         #verifin {
+             margin: 0 auto;
+             width: 50%;
+         }
 		#loading {
 		    margin: 0 auto;
 		    width: 50%;
@@ -16,19 +20,20 @@
 
     <div class="container"><br>
       <center>
+        <img src="/static/verifin.png" id="verifin">
         <h2>Authenticity of Linkedin Profiles</h2>
-		<h3>{{ value }}</h3>
+        <h4>#PSOSM</h4>
+        </br>
       </center>
     </div>
-	<div id="loading" style="display:none;"><img src="/static/loading.gif" alt="Loading!" /></div>
     <div class=container"><br>
     <div class="row align-items-center justify-content-center">
     <div class="col-md-4">
       <form  action="" method="post" role="form">
         {{ form.csrf }}
         <div class="form-group">
-          <label for="name">https://www.linkedin.com/in/</label>
-          <input type="text" class="form-control" id="name" name="name" placeholder="Enter the Linkedin username">
+          <label for="facebook_name"></label>
+          <input type="text" class="form-control" id="facebook_name" name="facebook_name" placeholder="Enter the Facebook profile link">
 	</div>
         <br>
         <center>
@@ -54,7 +59,22 @@
         {% endwith %}
     </div>
     <br>
-    </div>
+</div>
+</div>
+    <div class="container">
+      <center>
+        <div id="loading" style="display:none;"><img src="/static/loading.gif" alt="Loading!" /></div>
+        <table class="table">
+            <th>Section on Linkedin</th>
+            <th>Verfin Score</th>
+            {% for row in value[3] %}
+                <tr>
+                  <td>{{ row[0] }}</td>
+                  <td>{{ row[1] }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+      </center>
     </div>
   </body>
 </html>

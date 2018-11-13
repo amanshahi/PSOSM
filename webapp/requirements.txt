@@ -4,4 +4,3 @@ Flask-Bootstrap==2.2.2-1
 Flask-Cache==0.10.1
 Flask-FlatPages==0.3
 Flask-Gravatar==0.2.4
-Flask-WTForms

@@ -26,15 +26,15 @@ def get_response(input_name):
 			temp = []
 			for i in xrange(len(jobs)):
 				if len(jobs[i]) == 0: continue
-				temp.append((jobs[i], final[profile][ind][i]))
-			return profile, linkedin[0], fb[order[profile][ind]], temp
+				temp.append([jobs[i], final[profile][ind][i]])
+			return [profile, linkedin[0], fb[order[profile][ind]], temp]
 		else:
 			jobs = open('./Privacy Data/Linkedin_data/' + profile).read().split('\n')
 			temp = []
 			for i in xrange(len(jobs)):
 				if len(jobs[i]) == 0: continue
-				temp.append((jobs[i], final[profile][0][i]))
-			return profile, linkedin[0], fb[0], temp
+				temp.append([jobs[i], final[profile][0][i]])
+			return [profile, linkedin[0], fb[0], temp]
 	else:
 		return 'Not a valid name, please refer the name file and select a valid name.'
 		#Raise an error in this case
